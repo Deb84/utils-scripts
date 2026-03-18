@@ -1,4 +1,4 @@
-Place the `update-server.bat` file into your server directory.
+Place the `update-server.bat` file into your server directory.  
 You need to edit the `update-server.bat` file to add your server path at the `DEV_PATH` variable.
 
 **E.G :**
