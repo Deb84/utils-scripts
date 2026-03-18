@@ -1,5 +1,5 @@
 Place the `update-server.bat` file into your server directory.  
-You need to edit the `update-server.bat` file to add your server path at the `DEV_PATH` variable.
+You need to edit the `update-server.bat` file to add your server path to the `DEV_PATH` variable.
 
 **E.G :**
 ```batch
