@@ -6,4 +6,4 @@ You need to edit the `update-server.bat` file to add your server path at the `DE
 set "DEV_PATH=My\Server\Path"
 ```
 
-If it doesn't work, verify that the path of `SERVER_PATH` variable exists.
+If it doesn't work, verify that the path in `SERVER_PATH` variable exists.
