@@ -131,11 +131,12 @@ function Create-StartPathObject(
 
 
 foreach ($path in $BASE_PATHS) {
-    Throw-IfUncorrectPath $path $true
+    Throw-IfUncorrectPath $path "Unable to find the games files, the game is installed ?"
 }
 
 $USER_SERVER_DIR = Show-PathDialog "Please select your server folder" 
 Set-Location $USER_SERVER_DIR
+
 
 $SERVER_FILE_PATH = Fast-Copy $BASE_SERVER_PATH $USER_SERVER_DIR
 $ASSETS_FILE_PATH = Fast-Copy $BASE_ASSETS_PATH $USER_SERVER_DIR
