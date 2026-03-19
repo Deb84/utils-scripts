@@ -143,7 +143,7 @@ function Select-Path() {
 
     New-Btn $form "OK" "400,185" {
         foreach ($pathObj in $REQUIRED_SELECT_PATHS) {
-            if (-not (IsCorrect-Path $pathObj)) {
+            if (-not (IsCorrect-Path $pathObj.result)) {
                 Show-IncorrectPath $form "10,185"
                 continue
             }
