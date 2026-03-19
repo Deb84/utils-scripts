@@ -9,7 +9,7 @@ $BASE_PATHS = $BASE_LATEST_DIR, $BASE_ASSETS_PATH, $BASE_SERVER_PATH
 
 function Critical-Error() { throw "An error occured" }
 
-function Is-NullString($string) { return [string]::IsNullOrEmpty($path) }
+function Is-NullString($string) { return [string]::IsNullOrWhiteSpace($string) }
 
 function Unable-ToReach($url, [bool]$critical) { 
     Write-Host "Unable to reach $url"
@@ -17,6 +17,7 @@ function Unable-ToReach($url, [bool]$critical) {
 }
 
 function Uncorrect-Path($path, $msg) {
+    Write-Host "Uncorrect path trigerred"
     Unable-ToReach $path $false
     Write-Host $msg
     Critical-Error
@@ -27,11 +28,14 @@ function Throw-IfUncorrectPath($path, $msg) {
 }
 
 function IsCorrect-Path($path) {
+    Write-Host $path.GetType().FullName
     if (Is-NullString $path) {
+        Write-Host "string null"
         return $false
     }
 
     if (-Not (Test-Path $path)) {
+        Write-Host "test path"
         return $false
     }
     return $true
@@ -39,11 +43,7 @@ function IsCorrect-Path($path) {
 
 function Get-FileName($url) { return [System.IO.Path]::GetFileName($url) }
 
-function Get-RelativePath([string]$p1, [string]$p2) { 
-Write-Host $p1 
-Write-Host $p2
-return $p2.Substring($p1.Length).TrimStart([System.IO.Path]::DirectorySeparatorChar) 
-}
+function Get-RelativePath([string]$p1, [string]$p2) { return $p2.Substring($p1.Length).TrimStart([System.IO.Path]::DirectorySeparatorChar) }
 
 function Show-PathDialog($message, $default) {
     Write-Host $message
@@ -55,10 +55,12 @@ function Show-PathDialog($message, $default) {
     $dialog.RootFolder = [System.Environment+SpecialFolder]::MyComputer
     $dialog.Description = $message
 
-    $dialog.ShowDialog($form) | Out-Null
+    $dialog.ShowDialog($form)
+
     $path = $dialog.SelectedPath
 
-    if (-not (Is-NullString $default) -and -not (IsCorrect-Path $path)) {
+    if (-not (Is-NullString $default) -and $dialog -ne [System.Windows.Forms.DialogResult]::OK ) {
+        Write-Host "Default Triggered"
         return $default
     }
 
