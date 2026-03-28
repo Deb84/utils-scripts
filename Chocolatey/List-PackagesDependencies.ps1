@@ -43,7 +43,7 @@ foreach ($p in $packages) {
     if ($p.Dependencies.Count -eq 0) { continue }
     $p | Select-Object Name, Version
     foreach ($d in $p.Dependencies) {
-        "      $($d.Name)  $($d.Version)"
+        "    $($d.Name)  $($d.Version)"
     }
     "---------------------------------------------"
 }
